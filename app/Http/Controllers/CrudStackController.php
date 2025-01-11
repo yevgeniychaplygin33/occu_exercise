@@ -60,12 +60,36 @@ class CrudStackController extends Controller
         return redirect('/index')->with('message', 'All data deleted.');
     } 
 
-    public function update(UpdateRequest $updateRequest)
+    public function update(UpdateRequest $updateRequest, $name)
     {
-        $updatedValues = $updateRequest->validated();
-        $data = SimpleDataSet::find($updatedValues['name']);
+        // make sure that we can update the name 
+        // if it's different that what was the original
+        // but still unique in db
         
-        dd($data);
+        $updatedValues = $updateRequest->validated();
+
+        if ($name != $updateRequest['name']){
+            $valid = $updateRequest->validate([
+                'name' => 'unique:App\Models\SimpleDataSet,name'
+            ], [$updateRequest['name']]);
+        }
+
+       
+        $data = SimpleDataSet::where('name', $name)->first();
+        
+        $data['name'] = $updatedValues['name'];
+        $data['title'] = $updatedValues['title'];
+        $data['city'] = $updatedValues['city'];
+        $data['state'] = $updatedValues['state'];
+
+        // $data->name = $updatedValues['name'];
+        // $data->title = $updatedValues['title'];
+        // $data->city = $updatedValues['city'];
+        // $data->state = $updatedValues['state'];
+
+        $data->save();
+
+        return back()->with('success', 'Data updated successfully!');
 
     }
 

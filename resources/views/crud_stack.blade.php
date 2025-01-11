@@ -57,9 +57,11 @@
                 </tr>
             </thead>
             <tbody> @foreach($dataSet as $currentData) 
-
                 <tr x-data="{ isEditable: false, isChecked: false }">
                     <td class="flex-center"><input id="checkBox" type="checkbox" x-model="isChecked" x-bind:disabled="isChecked ? false : (checkedCount >= 2)" @change="checkedCount = isChecked ? checkedCount + 1 : checkedCount - 1"></td>
+                    <form action="/update/{{ $currentData->name }}" method="POST">
+                    @csrf
+                    @method('PUT')
                     <td id='tableRow'>
                         <input name="name" type="text" x-bind:disabled="!isEditable" value="{{ $currentData->name }}">
                     </td>
@@ -74,6 +76,7 @@
                     </td>
                     <td id='tableRow'>{{ $currentData->updated_at }}</td>
                     <td class="flex-center">@include('components.edit')</td>
+                </form>
                     <td id="deleteBtn">@include('components.delete')</td>
                 </tr>
                @endforeach 
