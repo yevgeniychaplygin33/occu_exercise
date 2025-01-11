@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CrudStackController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StatusValuesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [StatusValuesController::class, 'getStatusValues']);
+Route::get('/index', [CrudStackController::class, 'index'])->name('form.show');;
+Route::post('/save', [CrudStackController::class, 'saveForm'])->name('form.save');
+
+Route::post('/search', [CrudStackController::class, 'search'])->name('form.search');
+
+Route::delete('/delete/all', [CrudStackController::class, 'deleteAll'])->name('form.deleteAll');
+Route::delete('/delete/{name}', [CrudStackController::class, 'delete'])->name('form.delete');
+
+// update
+Route::put('/update/{name}', [CrudStackController::class, 'update'])->name('form.update');
+
+// copy
+
+
