@@ -42,8 +42,8 @@
                 @include('components.search')
                 <h2 class="subDataH" class="mt-3">Submitted Data</h2>
             </div>
-    <div x-data="{ editing: true }">
-        <table class="table table-striped table-sm mt-5">
+    <div x-data="{ editing: true, selected: [] }">
+        <table class="table table-striped table-sm mt-5 mr-3 ">
             <thead class="thead-dark">
                 <tr>
                     <th id="cmprTxt">Select 2 to compare</th>
@@ -54,12 +54,15 @@
                     <th>Updated At</th>
                     <th id="editBtn"></th>
                     <th id="deleteBtn"></th>
+                    <th id="copyHeader"></th>
                 </tr>
             </thead>
             <tbody> @foreach($dataSet as $currentData) 
-                <tr x-data="{ isEditable: false, isChecked: false }">
-                    <td class="flex-center"><input id="checkBox" type="checkbox" x-model="isChecked" x-bind:disabled="isChecked ? false : (checkedCount >= 2)" @change="checkedCount = isChecked ? checkedCount + 1 : checkedCount - 1"></td>
-                    <form action="/update/{{ $currentData->name }}" method="POST">
+                <tr x-data="{ isEditable: false  }">
+                    <td class="flex-center">
+                        <input id="checkBox" type="checkbox" x-model="selected"  @change="if (selected.length > 2) selected.pop()" value="{{ $currentData->name }}" >
+                    </td>
+                    <form action="/update/{{ $currentData->name }}" method="POST" name="updateForm" id="updateForm" class="updateForm">
                     @csrf
                     @method('PUT')
                     <td id='tableRow'>
@@ -75,18 +78,33 @@
                         <input name="state" type="text" x-bind:disabled="!isEditable" value="{{ $currentData->state }}">
                     </td>
                     <td id='tableRow'>{{ $currentData->updated_at }}</td>
-                    <td class="flex-center">@include('components.edit')</td>
+                    <td>
+                        @include('components.edit')
+                    </td>
                 </form>
-                    <td id="deleteBtn">@include('components.delete')</td>
+                <td  id="deleteBtn">
+                    
+                    @include('components.delete')</td>
+                    <td id="copyBtn">
+                        @include('components.copy-edit-modal')  
+
+                    </td>
                 </tr>
                @endforeach 
             </tbody>
         </table>
-    </div>
-        <button id='cmprBtn'>Compare</button>
+    
+    <div class="container bottomBtns" >
+        <form method="GET" x-bind:action="">
+            <input type="hidden" id="selected" name="selected" x-model="selected">
+            <button type="submit" class="btn btn-info" id='compareBtn'>Compare</button>
+        </form>
         <form method="POST" action="/delete/all" >
             @csrf 
             @method('DELETE')
-            <button id='cmprBtn'>Delete All</button>
+            <button class=" btn btn-danger" id='deleteAllBtn'>Delete All</button>
         </form>
+    </div>
+</div>
+        
 @endsection

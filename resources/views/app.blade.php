@@ -4,25 +4,50 @@
 <head>
     <title>Laravel App</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="..\views\app.blade.php">
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
+    <script> 
+    function resetFormByName(formName) { 
+        const form = document.getElementsByName(formName);
+        if (form){
+            for (i=0; i < form.length; i++){
+                form[i].reset();
+            }
+        } 
+    }
+
+    </script>
     <style>
-        .tableData {
-            height: 10px;
+        [x-cloak] { display: none !important; }
+        
+        #copyModal{
+            margin-left: 10px;
         }
 
-        .tabled {
-            margin: 0;
-            padding: 0;
+
+        #deleteAllBtn{
+            margin: 50px 0 50px 50px;
         }
+
+        .bottomBtns { 
+            width: 100%; 
+            display: flex; 
+            justify-content: space-between;
+            padding: 0px;
+            margin-bottom: 50px; 
+        }
+
 
         #cmprTxt {
             width: 1em;
         }
 
-        #cmprBtn {
-            margin: 0px 0px 50px 0;
+        #compareBtn {
+            padding: 0 10px 0 10px;
+            height: 40px;
+            /* margin: 50px 0px 50px 0; */
         }
 
         #cb {
@@ -61,7 +86,7 @@
             padding-right: 40px;
         }
 
-        #deleteBtn {
+        #deleteBtn #copyBtn{
             border: 0 0 0 10px;
             text-align: center;
             vertical-align: middle;
@@ -110,7 +135,6 @@
         }
 
         #checkBox{
-            /* margin-left: 50px; */
             height: 20px;
             width: 20px;
         }
@@ -119,7 +143,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100px; /* Adjust as needed */
+            height: 100px; 
         }
 </style>
 </head>
@@ -131,28 +155,5 @@
     <div class="container">
         @yield('content')
     </div>
-    <!-- <div x-data="{ editing: false, name: 'John Doe', email: 'john.doe@example.com' }" class="p-4">
-        <div x-show="!editing">
-            <p><strong>Name:</strong> <span x-text="name"></span></p>
-            <p><strong>Email:</strong> <span x-text="email"></span></p>
-            <button @click="editing = true" class="bg-blue-500 text-white px-4 py-2 rounded">Edit</button>
-        </div>
-
-        <div x-show="editing">
-            <form @submit.prevent="editing = false">
-                <div class="mb-4">
-                    <label for="name" class="block text-gray-700">Name:</label>
-                    <input type="text" id="name" x-model="name" class="border rounded px-2 py-1 w-full">
-                </div>
-                <div class="mb-4">
-                    <label for="email" class="block text-gray-700">Email:</label>
-                    <input type="email" id="email" x-model="email" class="border rounded px-2 py-1 w-full">
-                </div>
-                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Save</button>
-                <button type="button" @click="editing = false" class="bg-red-500 text-white px-4 py-2 rounded">Cancel</button>
-            </form>
-        </div>
-    </div>
-    <table> <thead> <tr> <th>Name</th> <th>Email</th> <th>Action</th> </tr> </thead> <tbody> <tr x-data="{ isEditable: false }"> <td> <input type="text" x-bind:disabled="!isEditable" value="John Doe"> </td> <td> <input type="text" x-bind:disabled="!isEditable" value="john.doe@example.com"> </td> <td> <button @click="isEditable = !isEditable"> <span x-text="isEditable ? 'Save' : 'Edit'"></span> </button> </td> </tr> <tr x-data="{ isEditable: false }"> <td> <input type="text" x-bind:disabled="!isEditable" value="Jane Smith"> </td> <td> <input type="text" x-bind:disabled="!isEditable" value="jane.smith@example.com"> </td> <td> <button @click="isEditable = !isEditable"> <span x-text="isEditable ? 'Save' : 'Edit'"></span> </button> </td> </tr> </tbody> </table> -->
 </body>
 </html>

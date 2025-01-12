@@ -33,4 +33,16 @@ class SimpleDataSet extends Model
     {
         return false;
     }
+
+    public function scopeFilter($query, array $filters)
+    {
+        if($filters['searchInput'] ?? false && $filters['searchOption'] ?? false){
+            // if searching by time, query using like 
+            if($filters['searchOption'] == 'updated_at'){
+                $query->where(request('searchOption'), 'like', '%' . request('searchInput') . '%');
+            } else {
+                $query->where(request('searchOption'), request('searchInput'));
+            }
+        }
+    }
 }

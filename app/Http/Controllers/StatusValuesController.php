@@ -20,15 +20,11 @@ class StatusValuesController extends Controller
         $statusValues = StatusValue::all();
         if ($statusValues->isEmpty())
         {
-            dd($statusValues);
             $statusValues = $this->createRandomStatusValues();
             $statusValues = StatusValue::all();
         }
-
         
         return view('statuses', ['statuses' => $statusValues]);
-        // return view('mainContent');
-        // return $statusValues;
     }   
 
 
