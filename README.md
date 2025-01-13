@@ -1,66 +1,56 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# OCCU Exercise
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+#### System Requirements
 
-## About Laravel
+- PHP 8
+- Windows
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+------------
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+#### PHP Installation
 
-## Learning Laravel
+1. Download PHP: Go to the PHP downloads page and download the PHP 8.2 zip file for Windows. Look for the "VS16 x64 Thread Safe (2024-Dec-17 14:59:22)" version.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+	https://windows.php.net/download#php-8.2
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+2. Extract the Files: Extract the downloaded zip file to a directory on your computer, such as C:\Program Files\php.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+3. Open the php directory, and find php.ini-development. Change the file name to php.ini. Open that file in a text editor and search for:
+    - extension_dir= "ext"
+    - extension=curl
+    - extension=fileinfo
+	- extension=mbstring
+    - extension=mysqli
+    - extension=openssl
+    - extension=pdo_mysql
+    - extension=pdo_odbc
+    - extension=pdo_sqlite
+    - extension=zip
 
-## Laravel Sponsors
+    and remove the semicolon (;) from the front of each of those. Save and close.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+4. Add PHP to PATH: Add the PHP directory to your systems PATH environment variable. Press the Windows key, type "environment", and select "Edit the system environment variables". In the System Properties window, click on the "Advanced" tab and then click "Environment variables...". In the Environment Variables window, find the PATH variable under "System variables", select it, and click "Edit". Click "Browse..." and navigate to the PHP directory (e.g., C:\Program Files\PHP). Click "OK" to close all the dialog boxes.
 
-### Premium Partners
+5. Test the Installation: Open the Command Prompt (CMD) and type php -v. You should see information about your installed PHP version.
+6. Inside the project path (/occu_exercise), run this command
+    ```php
+    php composer.phar install
+    ```
+    This may take a couple minutes.
+------------
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
 
-## Contributing
+#### Running Code
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+In the CMD, navigate to where this repo was downloaded to. Run this command to start a local server:
+ `php -S localhost:8080 -t public`
 
-## Code of Conduct
+Replace 8080 with another port number if that port is taken.
+Open a browser and navigate to https://localhost:8080
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+------------
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### Troubleshooting
+- php -v gives errors/warning: Please make sure all the correct extensions listed above have the semicolon (;) remove from the front.
